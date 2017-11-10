@@ -1,0 +1,59 @@
+import pygame
+import random
+
+BLACK = (   0,   0,   0)
+WHITE = ( 255, 255, 255)
+GREEN = (   0, 255,   0)
+RED   = ( 255,   0,   0)
+BLUE  = (   0,   0, 255)
+
+pygame.init()
+
+screenSizeW = 400
+screenSizeH = 400
+screenSize = (screenSizeW, screenSizeH)
+screen = pygame.display.set_mode(screenSize)
+pygame.display.set_caption('SNOW!')
+
+done = False
+clock = pygame.time.Clock()
+
+starList = []
+for i in range(50):
+		x = random.randrange(0,screenSizeW)
+		y = random.randrange(0,screenSizeH)
+		starList.append([x,y]) #50 [x,y] saved in starList
+
+while not done:
+	#all EVENT PROCESSING should go BELOW this comment
+	for event in pygame.event.get(): #check the events list
+		if event.type == pygame.QUIT: #if user clicks the X
+			done = True 
+	#all EVENT PROCESSING should go ABOVE this comment
+	
+	#all GAME LOGIC should go BELOW this comment
+	
+	#all GAME LOGIC should go ABOVE this comment	
+	
+	
+	#all code to DRAW should go BELOW this comment
+
+	#first clear the screen to white or your background
+	#don't put other drawing commands above background one
+	screen.fill(BLACK)
+	
+	for item in starList: 
+		item[1] += 1 #add 1 to item index 1 (aka y)
+		pygame.draw.circle(screen, WHITE, item, 2)
+		if item[1] > screenSizeH:
+			item[1]= random.randrange(-20,-5)
+			item[0]= random.randrange(0, screenSizeW)
+
+	#all code to DRAW should go ABOVE this comment
+	
+	pygame.display.flip()
+	clock.tick(20)
+
+
+pygame.quit()
+
